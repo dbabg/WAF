@@ -20,5 +20,5 @@ Web Application Firewall based on Apache/2.4.6 with PHP 7.2 and mod_rewrite modu
 
 # Main features
 
--- whitelist/blacklist http requests (GET method) with simple regex generator, composite regeex patterns or ap_expr expression
+-- whitelist/blacklist http requests (GET method) with simple regex generator, composite regex patterns or ap_expr expression
 
