@@ -1,0 +1,54 @@
+#rule 1
+
+RewriteCond %{REQUEST_METHOD} ^(CONNECT|DEBUG|DELETE|MOVE|PUT|TRACE|TRACK) [NC]
+RewriteCond %{REQUEST_URI} !^/phpmyadmin
+RewriteCond %{REQUEST_URI} !^/admin
+RewriteRule .* - [F]
+
+#rule 2
+
+RewriteCond expr "%{THE_REQUEST} != 'GET /public/read_np3.php?location=Sofia&submit=View+Results HTTP/1.1'"
+RewriteCond expr "%{THE_REQUEST} != 'GET /admin/access_log.php HTTP/1.1'"
+RewriteCond expr "%{THE_REQUEST} != 'GET /admin/index.php HTTP/1.1'"
+RewriteCond expr "%{THE_REQUEST} != 'GET /admin/restart.php HTTP/1.1'"
+RewriteCond expr "%{THE_REQUEST} != 'GET /admin/admin_users.php HTTP/1.1'"
+RewriteCond expr "%{THE_REQUEST} != 'GET /admin/assets/fonts/glyphicons-halflings-regular.woff2 HTTP/1.1'"
+RewriteCond expr "%{THE_REQUEST} != 'GET /admin/index.php HTTP/1.1'"
+RewriteCond expr "%{THE_REQUEST} != 'GET /admin/modrewrite.php HTTP/1.1'"
+RewriteCond expr "%{THE_REQUEST} != 'GET /admin/preview_rules.php HTTP/1.1'"
+RewriteCond expr "%{THE_REQUEST} != 'GET /admin/login.php HTTP/1.1'"
+RewriteCond expr "%{THE_REQUEST} != 'GET /favicon.ico HTTP/1.1'"
+RewriteCond expr "%{THE_REQUEST} != 'GET /public/ HTTP/1.1'"
+RewriteCond expr "%{THE_REQUEST} != 'GET /public/read_np3.php HTTP/1.1'"
+RewriteCond expr "%{THE_REQUEST} != 'POST /admin/prepare_rules.php HTTP/1.1'"
+RewriteCond expr "%{THE_REQUEST} != 'POST /admin/authenticate.php HTTP/1.1'"
+RewriteCond expr "%{THE_REQUEST} != 'GET /admin/logout.php HTTP/1.1'"
+RewriteCond expr "%{THE_REQUEST} != 'GET /admin/ HTTP/1.1'"
+RewriteCond expr "%{THE_REQUEST} != 'GET /admin/assets/fonts/font-awesome/css/font-awesome.min.css HTTP/1.1'"
+RewriteCond expr "%{THE_REQUEST} != 'GET /admin/assets/css/bootstrap.min.css HTTP/1.1'"
+RewriteCond expr "%{THE_REQUEST} != 'GET /admin/assets/js/metisMenu/metisMenu.min.css HTTP/1.1'"
+RewriteCond expr "%{THE_REQUEST} != 'GET /admin/assets/css/sb-admin-2.css HTTP/1.1'"
+RewriteCond expr "%{THE_REQUEST} != 'GET /admin/assets/fonts/font-awesome/css/font-awesome.min.css HTTP/1.1'"
+RewriteCond expr "%{THE_REQUEST} != 'GET /admin/assets/js/jquery.min.js HTTP/1.1'"
+RewriteCond expr "%{THE_REQUEST} != 'GET /admin/assets/js/highlight.js HTTP/1.1'"
+RewriteCond expr "%{THE_REQUEST} != 'GET /admin/assets/js/bootstrap.min.js HTTP/1.1'"
+RewriteCond expr "%{THE_REQUEST} != 'GET /admin/assets/js/metisMenu/metisMenu.min.js HTTP/1.1'"
+RewriteCond expr "%{THE_REQUEST} != 'GET /admin/assets/js/sb-admin-2.js HTTP/1.1'"
+RewriteCond expr "%{THE_REQUEST} != 'GET /admin/assets/js/jquery.validate.min.js HTTP/1.1'"
+RewriteCond expr "%{THE_REQUEST} != 'GET /admin/assets/fonts/font-awesome/fonts/fontawesome-webfont.ttf?v=4.7.0 HTTP/1.1'"
+RewriteCond expr "%{THE_REQUEST} != 'GET /admin/assets/fonts/font-awesome/fonts/fontawesome-webfont.woff?v=4.7.0 HTTP/1.1'"
+RewriteCond expr "%{THE_REQUEST} != 'GET /admin/assets/fonts/font-awesome/fonts/fontawesome-webfont.woff2?v=4.7.0 HTTP/1.1'"
+RewriteCond expr "%{THE_REQUEST} != 'GET /admin/insertraw.php HTTP/1.1'"
+RewriteCond expr "%{THE_REQUEST} != 'GET /admin/rules.php HTTP/1.1'"
+RewriteCond expr "%{THE_REQUEST} != 'POST /admin/insertraw.php HTTP/1.1'"
+RewriteRule .* - [F,C] 
+
+#rule 3
+
+RewriteCond %{REQUEST_URI} !^/phpmyadmin
+RewriteCond %{REQUEST_URI} !^/public3
+RewriteCond %{REQUEST_URI} !^/admin
+RewriteCond %{QUERY_STRING} ^.*(localhost|loopback|127\.0\.0\.1).*                                [NC,OR]
+RewriteCond %{QUERY_STRING} ^.*(\.|\*|;|<|>|'|"|\)|%0A|%0D|%22|%27|%3C|%3E|%00).*                 [NC,OR]
+RewriteCond %{QUERY_STRING} ^.*(md5|benchmark|union|select|insert|cast|set|declare|drop|update).* [NC]
+RewriteRule ^(.*)$ - [F,L]

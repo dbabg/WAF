@@ -1,0 +1,5 @@
+127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
+::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
+
+192.168.20.129 fes1.front.org fes1-http
+192.168.20.130 fes2.front.org fes2-nginx

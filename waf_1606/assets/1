@@ -1,0 +1,42 @@
+<?php
+session_start();
+require_once './config/config.php';
+require_once 'includes/auth_validate.php';
+
+$numrules = 0;
+
+include_once('includes/header.php');
+
+$output = shell_exec('sudo /srv/script/view_log.sh 2>&1');
+
+$logFile = 'log4.txt';
+$lines = file($logFile); // create array
+$table = '<table border="1"><tr><th class="header">id</th><th>count</th><th>ip</th><th>request</th><th>http_code</th><th>user_agent</th><th>actions</th></tr>';
+
+foreach($lines as $line){
+    list($id,$count,$ip,$request,$http_code,$user_agent) = explode('" "', $line);
+    $action = '<form name="editid" action="prepare_rules.php" method="POST"><input type="hidden" name="id" value="' . $id . '"><input type="hidden" name="request" value="' . $request . '"><input type="submit" name="editid" value="Edit"></form>';
+    $table .= "<tr' . ($id == 10 ? '' : 'class="green-row"') . '><td>$id</td><td>$count</td><td>$ip</td><td>$request</td><td>$http_code</td><td>$user_agent</td><td>$action</td></tr>";
+;
+}
+
+$table .= '</table>';
+
+?>
+
+<div id="page-wrapper">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 "class="page-header">Access Log grouped by unique requests</h1>
+        </div>
+    </div>
+    <div id="display-table">
+    <div class="row">
+    <tbody>
+       <div class="text-left" >
+       <div class="table"><?php echo $table;?></div>
+     </div
+</div>
+<!-- /#page-wrapper -->
+
+<?php include_once('includes/footer.php'); ?>
